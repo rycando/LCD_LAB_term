@@ -1,35 +1,39 @@
 // FILE: tb_autorepeat.v
 `timescale 1ns/1ps
 module tb_autorepeat;
-    reg clk_100mhz;
+    reg clk_50mhz;
     reg rst_btn;
     reg btn_accel;
     reg btn_decel;
     reg [2:0] gear_sw;
 
     wire servo_pwm;
-    wire [3:0] fnd_sel;
-    wire [7:0] fnd_seg;
+    wire [7:0] speed_fnd_sel;
+    wire [7:0] speed_fnd_seg;
+    wire [7:0] gear_seg;
     wire [7:0] leds;
+    wire piezo;
 
     localparam integer INITIAL_HOLD_CYCLES = 300;
     localparam integer REPEAT_CYCLES       = 150;
 
     top dut (
-        .clk_100mhz(clk_100mhz),
+        .clk_50mhz(clk_50mhz),
         .rst_btn(rst_btn),
         .btn_accel(btn_accel),
         .btn_decel(btn_decel),
         .gear_sw(gear_sw),
         .servo_pwm(servo_pwm),
-        .fnd_sel(fnd_sel),
-        .fnd_seg(fnd_seg),
-        .leds(leds)
+        .speed_fnd_sel(speed_fnd_sel),
+        .speed_fnd_seg(speed_fnd_seg),
+        .gear_seg(gear_seg),
+        .leds(leds),
+        .piezo(piezo)
     );
 
     initial begin
-        clk_100mhz = 1'b0;
-        forever #5 clk_100mhz = ~clk_100mhz;
+        clk_50mhz = 1'b0;
+        forever #10 clk_50mhz = ~clk_50mhz;
     end
 
     initial begin

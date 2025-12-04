@@ -1,7 +1,7 @@
 // FILE: tb_top.v
 `timescale 1ns/1ps
 module tb_top;
-    reg clk_100mhz;
+    reg clk_50mhz;
     reg rst_btn;
     reg btn_accel;
     reg btn_decel;
@@ -15,7 +15,7 @@ module tb_top;
     wire piezo;
 
     top dut (
-        .clk_100mhz(clk_100mhz),
+        .clk_50mhz(clk_50mhz),
         .rst_btn(rst_btn),
         .btn_accel(btn_accel),
         .btn_decel(btn_decel),
@@ -29,8 +29,8 @@ module tb_top;
     );
 
     initial begin
-        clk_100mhz = 1'b0;
-        forever #5 clk_100mhz = ~clk_100mhz;
+        clk_50mhz = 1'b0;
+        forever #10 clk_50mhz = ~clk_50mhz;
     end
 
     initial begin

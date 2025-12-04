@@ -1,5 +1,6 @@
 # 작업 지침
 - 모든 설명, 커밋 메시지, PR 본문은 한국어로 작성합니다.
+- 보드 시스템 클럭은 50MHz 입력(`clk_50mhz`)을 기준으로 하며, `clk_divider`의 `INPUT_FREQ` 기본값도 50MHz로 유지합니다. 테스트벤치 클럭 주기는 20ns(토글 10ns)로 맞춥니다.
 - 리셋 신호는 active-high `rst` 비동기 방식으로 통일합니다.
 - 코드 스타일은 Verilog-2001을 사용하고, 비트 폭을 명시합니다.
 - 테스트 코드를 추가하고, 작성한 테스트는 자동으로 실행합니다(가능한 경우 iverilog 사용).
@@ -15,6 +16,7 @@
 - `leds[4:0]`는 RPM 전용 5단 바그래프로 사용하며, `speed_level`을 `max_level`에 대한 비율(20%/40%/60%/80%)로 표시합니다.
 - 풀컬러 LED와 바그래프의 동작은 `tb_top.v` 테스트벤치에서 검증하며, `./run_tests.sh` 스크립트로 iverilog/vvp 기반 자동 실행을 유지합니다.
 - PIEZO 부저는 `top` 모듈 출력 포트 `piezo`로 제공하며, `engine_sound` 모듈이 `clk_10khz`와 `rst`(active-high), `speed_level`을 받아 기본 200Hz에서 속도 단계당 150Hz씩 증가하는 사각파 엔진음을 생성합니다.
+- 서보 위치 제어는 `servo_rpm_ctrl` 기본 파라미터(스텝 1, 슬로 틱 200)로 작동하며, 속도 변화에 연속적으로 따라가도록 작은 스텝/짧은 지연을 유지합니다.
 - FND/7-세그 표시 구조: 속도는 8자리 전용 `speed_fnd_controller`(출력 포트 `speed_fnd_sel[7:0]`, `speed_fnd_seg[7:0]`)에서 `speed_level`을 최소 자리수에, `max_level`을 그 윗자리(BCD)로 표기하며 나머지는 0으로 채웁니다. 기어는 단일 7세그 포트 `gear_seg[7:0]`으로 분리해 `gear_display`로 구동합니다. 상위 모듈(`top`) 포트 및 관련 테스트벤치를 일관되게 갱신해야 합니다.
 - `one_pulse.v`는 `debounce`/`autorepeat` 조합에서 버튼 단발 검출을 모두 처리하므로 설계와 테스트 스크립트에서 제거했습니다.
 - 4자리 FND용 `fnd_controller.v`는 8자리 전용 `speed_fnd_controller`와 `gear_display`로 대체되어 더 이상 사용하지 않습니다.

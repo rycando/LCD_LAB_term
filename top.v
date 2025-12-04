@@ -1,6 +1,6 @@
 // FILE: top.v
 module top (
-    input  wire clk_100mhz,
+    input  wire clk_50mhz,
     input  wire rst_btn,
     input  wire btn_accel,
     input  wire btn_decel,
@@ -19,7 +19,7 @@ module top (
     wire clk_1hz;
 
     clk_divider u_clk_div (
-        .clk_100mhz(clk_100mhz),
+        .clk_50mhz(clk_50mhz),
         .rst(rst_btn),
         .clk_1khz(clk_1khz),
         .clk_10khz(clk_10khz),
