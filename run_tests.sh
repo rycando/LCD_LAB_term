@@ -16,10 +16,17 @@ if ! command -v "$VVP_CMD" >/dev/null 2>&1; then
     exit 127
 fi
 
-echo "[INFO] iverilog로 tb_top 시뮬레이션 컴파일 중..."
-$IVL_CMD -g2012 -o "$TARGET" \
-    top.v clk_divider.v debounce.v one_pulse.v gear_ctrl.v rpm_ctrl.v servo_rpm_ctrl.v servo.v \
-    fnd_controller.v fnd_decoder.v dc_pwm_gen.v tb_top.v
+SOURCES=(
+    top.v clk_divider.v debounce.v autorepeat.v one_pulse.v gear_ctrl.v rpm_ctrl.v
+    servo_rpm_ctrl.v servo.v fnd_controller.v fnd_decoder.v
+)
 
-echo "[INFO] 시뮬레이션 실행..."
-$VVP_CMD "$TARGET"
+echo "[INFO] iverilog로 tb_top 시뮬레이션 컴파일 중..."
+$IVL_CMD -g2012 -o "${TARGET}_top" "${SOURCES[@]}" tb_top.v
+echo "[INFO] tb_top 시뮬레이션 실행..."
+$VVP_CMD "${TARGET}_top"
+
+echo "[INFO] iverilog로 tb_autorepeat 시뮬레이션 컴파일 중..."
+$IVL_CMD -g2012 -o "${TARGET}_autorepeat" "${SOURCES[@]}" tb_autorepeat.v
+echo "[INFO] tb_autorepeat 시뮬레이션 실행..."
+$VVP_CMD "${TARGET}_autorepeat"
