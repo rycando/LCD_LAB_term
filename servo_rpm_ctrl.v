@@ -2,8 +2,8 @@
 module servo_rpm_ctrl #(
     parameter integer PULSE_MIN     = 5,
     parameter integer PULSE_MAX     = 25,
-    parameter integer STEP_SIZE     = 2,
-    parameter integer SLOW_TICK_MAX = 1000
+    parameter integer STEP_SIZE     = 1,
+    parameter integer SLOW_TICK_MAX = 200
 ) (
     input  wire       clk,
     input  wire       rst,
