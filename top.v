@@ -6,8 +6,9 @@ module top (
     input  wire btn_decel,
     input  wire [2:0] gear_sw,
     output wire servo_pwm,
-    output wire [3:0] fnd_sel,
-    output wire [7:0] fnd_seg,
+    output wire [7:0] speed_fnd_sel,
+    output wire [7:0] speed_fnd_seg,
+    output wire [7:0] gear_seg,
     output wire [7:0] leds
 );
 
@@ -115,19 +116,24 @@ module top (
         .servo(servo_pwm)
     );
 
-    // FND display
-    wire [15:0] fnd_value;
-    assign fnd_value = {4'd0, gear_sel, 1'b0, speed_level};
+    // FND display: 속도 8자리, 기어 단일 7세그
+    wire [31:0] speed_fnd_value;
+    assign speed_fnd_value = {24'd0, max_level, speed_level};
 
-    fnd_controller #(
+    speed_fnd_controller #(
         .CLK_FREQ(1_000),
         .REFRESH_HZ(500)
-    ) u_fnd_ctrl (
+    ) u_speed_fnd_ctrl (
         .clk(clk_1khz),
         .rst(rst_clean),
-        .value(fnd_value),
-        .fnd_sel(fnd_sel),
-        .fnd_seg(fnd_seg)
+        .value(speed_fnd_value),
+        .fnd_sel(speed_fnd_sel),
+        .fnd_seg(speed_fnd_seg)
+    );
+
+    gear_display u_gear_display (
+        .gear(gear_sel),
+        .gear_seg(gear_seg)
     );
 
     // RPM 상태 단계와 LED 표현 (RGB + 바그래프)
