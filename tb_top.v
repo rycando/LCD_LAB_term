@@ -8,8 +8,9 @@ module tb_top;
     reg [2:0] gear_sw;
 
     wire servo_pwm;
-    wire [3:0] fnd_sel;
-    wire [7:0] fnd_seg;
+    wire [7:0] speed_fnd_sel;
+    wire [7:0] speed_fnd_seg;
+    wire [7:0] gear_seg;
     wire [7:0] leds;
 
     top dut (
@@ -19,8 +20,9 @@ module tb_top;
         .btn_decel(btn_decel),
         .gear_sw(gear_sw),
         .servo_pwm(servo_pwm),
-        .fnd_sel(fnd_sel),
-        .fnd_seg(fnd_seg),
+        .speed_fnd_sel(speed_fnd_sel),
+        .speed_fnd_seg(speed_fnd_seg),
+        .gear_seg(gear_seg),
         .leds(leds)
     );
 
