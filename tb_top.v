@@ -12,6 +12,7 @@ module tb_top;
     wire [7:0] speed_fnd_seg;
     wire [7:0] gear_seg;
     wire [7:0] leds;
+    wire piezo;
 
     top dut (
         .clk_100mhz(clk_100mhz),
@@ -23,7 +24,8 @@ module tb_top;
         .speed_fnd_sel(speed_fnd_sel),
         .speed_fnd_seg(speed_fnd_seg),
         .gear_seg(gear_seg),
-        .leds(leds)
+        .leds(leds),
+        .piezo(piezo)
     );
 
     initial begin
