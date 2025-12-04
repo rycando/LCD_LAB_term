@@ -24,7 +24,7 @@ module top (
         .clk_1hz(clk_1hz)
     );
 
-    // Debounce and one-pulse for buttons
+    // Debounce and autorepeat for buttons
     wire rst_clean;
     wire accel_clean;
     wire decel_clean;
@@ -53,14 +53,20 @@ module top (
     wire accel_pulse;
     wire decel_pulse;
 
-    one_pulse u_op_accel (
+    autorepeat #(
+        .INITIAL_HOLD_CYCLES(10'd300), // 300ms 지연 후 반복 시작 (1kHz 기준)
+        .REPEAT_CYCLES(10'd150)        // 150ms 주기로 반복 펄스 생성
+    ) u_ar_accel (
         .clk(clk_1khz),
         .rst(rst_clean),
         .level_in(accel_clean),
         .pulse_out(accel_pulse)
     );
 
-    one_pulse u_op_decel (
+    autorepeat #(
+        .INITIAL_HOLD_CYCLES(10'd300),
+        .REPEAT_CYCLES(10'd150)
+    ) u_ar_decel (
         .clk(clk_1khz),
         .rst(rst_clean),
         .level_in(decel_clean),
