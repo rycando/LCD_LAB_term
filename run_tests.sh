@@ -17,8 +17,8 @@ if ! command -v "$VVP_CMD" >/dev/null 2>&1; then
 fi
 
 SOURCES=(
-    top.v engine_sound.v clk_divider.v debounce.v autorepeat.v one_pulse.v gear_ctrl.v rpm_ctrl.v
-    servo_rpm_ctrl.v servo.v fnd_controller.v speed_fnd_controller.v gear_display.v fnd_decoder.v
+    top.v engine_sound.v clk_divider.v debounce.v autorepeat.v gear_ctrl.v rpm_ctrl.v
+    servo_rpm_ctrl.v servo.v speed_fnd_controller.v gear_display.v fnd_decoder.v
 )
 
 echo "[INFO] iverilog로 tb_top 시뮬레이션 컴파일 중..."
