@@ -9,7 +9,8 @@ module top (
     output wire [7:0] speed_fnd_sel,
     output wire [7:0] speed_fnd_seg,
     output wire [7:0] gear_seg,
-    output wire [7:0] leds
+    output wire [7:0] leds,
+    output wire piezo
 );
 
     // Clock generation
@@ -114,6 +115,18 @@ module top (
         .l_ctrl(servo_l_ctrl),
         .r_ctrl(servo_r_ctrl),
         .servo(servo_pwm)
+    );
+
+    // 엔진음: 속도 단계에 비례한 PIEZO 음정
+    engine_sound #(
+        .CLK_FREQ_HZ(10_000),
+        .BASE_TONE_HZ(200),
+        .STEP_TONE_HZ(150)
+    ) u_engine_sound (
+        .clk(clk_10khz),
+        .rst(rst_clean),
+        .speed_level(speed_level),
+        .piezo(piezo)
     );
 
     // FND display: 속도 8자리, 기어 단일 7세그

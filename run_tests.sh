@@ -17,7 +17,7 @@ if ! command -v "$VVP_CMD" >/dev/null 2>&1; then
 fi
 
 SOURCES=(
-    top.v clk_divider.v debounce.v autorepeat.v one_pulse.v gear_ctrl.v rpm_ctrl.v
+    top.v engine_sound.v clk_divider.v debounce.v autorepeat.v one_pulse.v gear_ctrl.v rpm_ctrl.v
     servo_rpm_ctrl.v servo.v fnd_controller.v speed_fnd_controller.v gear_display.v fnd_decoder.v
 )
 
@@ -30,6 +30,11 @@ echo "[INFO] iverilog로 tb_display 시뮬레이션 컴파일 중..."
 $IVL_CMD -g2012 -o "${TARGET}_display" "${SOURCES[@]}" tb_display.v
 echo "[INFO] tb_display 시뮬레이션 실행..."
 $VVP_CMD "${TARGET}_display"
+
+echo "[INFO] iverilog로 tb_engine_sound 시뮬레이션 컴파일 중..."
+$IVL_CMD -g2012 -o "${TARGET}_engine" "${SOURCES[@]}" tb_engine_sound.v
+echo "[INFO] tb_engine_sound 시뮬레이션 실행..."
+$VVP_CMD "${TARGET}_engine"
 
 echo "[INFO] iverilog로 tb_autorepeat 시뮬레이션 컴파일 중..."
 $IVL_CMD -g2012 -o "${TARGET}_autorepeat" "${SOURCES[@]}" tb_autorepeat.v
