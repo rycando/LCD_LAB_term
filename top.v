@@ -5,7 +5,6 @@ module top (
     input  wire btn_accel,
     input  wire btn_decel,
     input  wire [2:0] gear_sw,
-    output wire dc_pwm,
     output wire servo_pwm,
     output wire [3:0] fnd_sel,
     output wire [7:0] fnd_seg,
@@ -88,14 +87,6 @@ module top (
         .max_level(max_level)
     );
 
-    // DC motor PWM
-    dc_pwm_gen u_dc_pwm (
-        .clk(clk_100mhz),
-        .rst(rst_clean),
-        .speed_level(speed_level),
-        .pwm_out(dc_pwm)
-    );
-
     // Servo control based on RPM gauge
     wire servo_l_ctrl;
     wire servo_r_ctrl;
@@ -133,5 +124,17 @@ module top (
         .fnd_seg(fnd_seg)
     );
 
-    assign leds = {1'b0, gear_sel, speed_level};
+    reg [2:0] rpm_rgb;
+
+    always @(*) begin
+        if (speed_level >= max_level) begin
+            rpm_rgb = 3'b100; // Red: high RPM
+        end else if (speed_level >= {1'b0, max_level[3:1]}) begin
+            rpm_rgb = 3'b110; // Yellow: caution range
+        end else begin
+            rpm_rgb = 3'b010; // Green: normal RPM
+        end
+    end
+
+    assign leds = {rpm_rgb, speed_level, 1'b0};
 endmodule
