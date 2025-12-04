@@ -124,17 +124,50 @@ module top (
         .fnd_seg(fnd_seg)
     );
 
+    // RPM 상태 단계와 LED 표현 (RGB + 바그래프)
+    localparam [1:0] RPM_NORMAL  = 2'd0;
+    localparam [1:0] RPM_CAUTION = 2'd1;
+    localparam [1:0] RPM_DANGER  = 2'd2;
+
+    reg [1:0] rpm_stage;
     reg [2:0] rpm_rgb;
+    reg [4:0] rpm_bar;
+
+    wire [6:0] scaled_speed = speed_level * 3'd5;
+    wire [6:0] threshold_1  = {3'b000, max_level};
+    wire [6:0] threshold_2  = threshold_1 << 1;          // 2x
+    wire [6:0] threshold_3  = threshold_1 + threshold_2; // 3x
+    wire [6:0] threshold_4  = threshold_2 << 1;          // 4x
 
     always @(*) begin
         if (speed_level >= max_level) begin
-            rpm_rgb = 3'b100; // Red: high RPM
+            rpm_stage = RPM_DANGER;
         end else if (speed_level >= {1'b0, max_level[3:1]}) begin
-            rpm_rgb = 3'b110; // Yellow: caution range
+            rpm_stage = RPM_CAUTION;
         end else begin
-            rpm_rgb = 3'b010; // Green: normal RPM
+            rpm_stage = RPM_NORMAL;
         end
     end
 
-    assign leds = {rpm_rgb, speed_level, 1'b0};
+    always @(*) begin
+        case (rpm_stage)
+            RPM_DANGER:  rpm_rgb = 3'b100; // Red: 위험 단계
+            RPM_CAUTION: rpm_rgb = 3'b110; // Yellow: 주의 단계
+            default:     rpm_rgb = 3'b010; // Green: 정상 단계
+        endcase
+    end
+
+    always @(*) begin
+        if (max_level == 0) begin
+            rpm_bar = 5'b0;
+        end else begin
+            rpm_bar[0] = (speed_level > 0);
+            rpm_bar[1] = (scaled_speed >= threshold_1);
+            rpm_bar[2] = (scaled_speed >= threshold_2);
+            rpm_bar[3] = (scaled_speed >= threshold_3);
+            rpm_bar[4] = (scaled_speed >= threshold_4);
+        end
+    end
+
+    assign leds = {rpm_rgb, rpm_bar};
 endmodule
