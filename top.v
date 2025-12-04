@@ -4,8 +4,6 @@ module top (
     input  wire rst_btn,
     input  wire btn_accel,
     input  wire btn_decel,
-    input  wire btn_servo_left,
-    input  wire btn_servo_right,
     input  wire [2:0] gear_sw,
     output wire dc_pwm,
     output wire servo_pwm,
@@ -31,8 +29,6 @@ module top (
     wire rst_clean;
     wire accel_clean;
     wire decel_clean;
-    wire servo_l_clean;
-    wire servo_r_clean;
 
     debounce u_db_rst (
         .clk(clk_1khz),
@@ -55,24 +51,8 @@ module top (
         .clean_out(decel_clean)
     );
 
-    debounce u_db_servo_l (
-        .clk(clk_1khz),
-        .rst(rst_clean),
-        .noisy_in(btn_servo_left),
-        .clean_out(servo_l_clean)
-    );
-
-    debounce u_db_servo_r (
-        .clk(clk_1khz),
-        .rst(rst_clean),
-        .noisy_in(btn_servo_right),
-        .clean_out(servo_r_clean)
-    );
-
     wire accel_pulse;
     wire decel_pulse;
-    wire servo_l_pulse;
-    wire servo_r_pulse;
 
     one_pulse u_op_accel (
         .clk(clk_1khz),
@@ -88,20 +68,6 @@ module top (
         .pulse_out(decel_pulse)
     );
 
-    one_pulse u_op_servo_l (
-        .clk(clk_1khz),
-        .rst(rst_clean),
-        .level_in(servo_l_clean),
-        .pulse_out(servo_l_pulse)
-    );
-
-    one_pulse u_op_servo_r (
-        .clk(clk_1khz),
-        .rst(rst_clean),
-        .level_in(servo_r_clean),
-        .pulse_out(servo_r_pulse)
-    );
-
     // Gear control
     wire [2:0] gear_sel;
     gear_ctrl u_gear_ctrl (
@@ -111,13 +77,15 @@ module top (
 
     // RPM control
     wire [3:0] speed_level;
+    wire [3:0] max_level;
     rpm_ctrl u_rpm_ctrl (
         .clk(clk_1khz),
         .rst(rst_clean),
         .accel_pulse(accel_pulse),
         .decel_pulse(decel_pulse),
         .gear(gear_sel),
-        .speed_level(speed_level)
+        .speed_level(speed_level),
+        .max_level(max_level)
     );
 
     // DC motor PWM
@@ -128,12 +96,25 @@ module top (
         .pwm_out(dc_pwm)
     );
 
+    // Servo control based on RPM gauge
+    wire servo_l_ctrl;
+    wire servo_r_ctrl;
+
+    servo_rpm_ctrl u_servo_rpm_ctrl (
+        .clk(clk_10khz),
+        .rst(rst_clean),
+        .speed_level(speed_level),
+        .max_level(max_level),
+        .l_ctrl(servo_l_ctrl),
+        .r_ctrl(servo_r_ctrl)
+    );
+
     // Servo control (predefined)
     servo u_servo (
         .clk(clk_10khz),
         .rst(rst_clean),
-        .l_ctrl(servo_l_pulse),
-        .r_ctrl(servo_r_pulse),
+        .l_ctrl(servo_l_ctrl),
+        .r_ctrl(servo_r_ctrl),
         .servo(servo_pwm)
     );
 

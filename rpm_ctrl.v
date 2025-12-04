@@ -12,10 +12,9 @@ module rpm_ctrl #(
     input  wire       accel_pulse,
     input  wire       decel_pulse,
     input  wire [2:0] gear,
-    output reg  [3:0] speed_level
+    output reg  [3:0] speed_level,
+    output reg  [3:0] max_level
 );
-
-    reg [3:0] max_level;
 
     always @(*) begin
         case (gear)
