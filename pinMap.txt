@@ -1,0 +1,190 @@
+Board: Device Family: spatan-7 | Device: xc7s75fgga484-1 (Xilinx S7 module)
+Format: <signal_name> : <fpga_package_pin>
+
+[CLOCK]
+FPGA_CLK1 : B6
+FPGA_CLK2 : C15
+FPGA_CLK3 : P15
+FPGA_CLK4 : M8
+
+[CLOCK(FPGA)]
+USER_Clock1 : D12
+USER_Clock2 : U18
+
+[LED]
+LED_D1 : L4
+LED_D2 : M4
+LED_D3 : M2
+LED_D4 : N7
+LED_D5 : M7
+LED_D6 : M3
+LED_D7 : M1
+LED_D8 : N5
+
+[7-Segment]
+SEG_A  : P1
+SEG_B  : P3
+SEG_C  : P7
+SEG_D  : N3
+SEG_E  : T5
+SEG_F  : R2
+SEG_G  : R4
+SEG_DP : R6
+
+[8 Array 7-Segment]
+AR_SEG_A  : F1
+AR_SEG_B  : F5
+AR_SEG_C  : E2
+AR_SEG_D  : E4
+AR_SEG_E  : J1
+AR_SEG_F  : J3
+AR_SEG_G  : J7
+AR_SEG_DP : H2
+AR_SEG_S0 : H4
+AR_SEG_S1 : H6
+AR_SEG_S2 : G1
+AR_SEG_S3 : G3
+AR_SEG_S4 : L6
+AR_SEG_S5 : K1
+AR_SEG_S6 : K3
+AR_SEG_S7 : K5
+
+[Button Switch]
+KEY01 : K4
+KEY02 : N8
+KEY03 : N4
+KEY04 : N1
+KEY05 : P6
+KEY06 : N6
+KEY07 : L5
+KEY08 : J2
+KEY09 : K2
+KEY10 : L7
+KEY11 : L1
+KEY12 : K6
+
+[DIP Switch]
+DIP_SW1 : Y1
+DIP_SW2 : W3
+DIP_SW3 : U2
+DIP_SW4 : T1
+DIP_SW5 : W4
+DIP_SW6 : W1
+DIP_SW7 : V4
+DIP_SW8 : U4
+
+[Full Color LED]
+F_LED1_BLUE  : U3
+F_LED1_GREEN : U5
+F_LED1_RED   : T2
+F_LED2_BLUE  : W2
+F_LED2_GREEN : V1
+F_LED2_RED   : U1
+F_LED3_BLUE  : R5
+F_LED3_GREEN : R7
+F_LED3_RED   : P2
+F_LED4_BLUE  : T3
+F_LED4_GREEN : T6
+F_LED4_RED   : R3
+
+[Text LCD]
+TLCD_D0 : A4
+TLCD_D1 : B2
+TLCD_D2 : C3
+TLCD_D3 : D4
+TLCD_D4 : A2
+TLCD_D5 : C5
+TLCD_D6 : C1
+TLCD_D7 : D1
+TLCD_E  : A6
+TLCD_RS : G6
+TLCD_RW : D6
+
+[PIEZO]
+PIEZO : Y21
+
+[Servo Motor]
+SERVO_CTRL : AA22
+
+[EEPROM]
+I2C_CLK  : W21
+I2C_DATA : V21
+
+[AD Convertor]
+SPI_AD   : H3
+SPI_DIN  : H5
+SPI_DOUT : J6
+SPI_SCK  : H7
+
+[DA Converter]
+DAC_A_B  : G2
+DAC_CSN  : E1
+DAC_LDACN: F4
+DAC_WRN  : G4
+DAC_D0   : E3
+DAC_D1   : E5
+DAC_D2   : D2
+DAC_D3   : D5
+DAC_D4   : C2
+DAC_D5   : C4
+DAC_D6   : B1
+DAC_D7   : B3
+
+[Step Motor]
+Step Sensor : Y19
+STEP_A      : Y20
+STEP_AN     : AA20
+STEP_B      : Y22
+STEP_BN     : AA21
+
+[USB to Serial]
+USB_TXD0 : F6
+USB_RXD0 : C6
+
+[UART]
+UART_TXD1 : A3
+UART_RXD1 : A5
+
+[BreadBoard I/O]
+BDIO00 : F8
+BDIO01 : E8
+BDIO02 : A7
+BDIO03 : G8
+BDIO04 : D7
+BDIO05 : B7
+BDIO06 : G7
+BDIO07 : F7
+BDIO08 : C8
+BDIO09 : D8
+BDIO10 : C9
+BDIO11 : B8
+BDIO12 : A9
+BDIO13 : B9
+BDIO14 : A10
+BDIO15 : B10
+
+[신호등 모듈 (확장 커넥터)]
+S_RED        : B13
+W_RED        : G14
+E_RED        : C17
+N_RED        : C12
+S_YELLOW     : L18
+W_YELLOW     : A14
+E_YELLOW     : C18
+N_YELLOW     : D13
+S_LEFT       : F15
+W_LEFT       : D15
+E_LEFT       : C19
+N_LEFT       : F10
+S_GREEN      : E16
+W_GREEN      : C16
+E_GREEN      : A20
+N_GREEN      : E11
+WALK_S_GREEN : E19
+WALK_W_GREEN : F12
+WALK_E_GREEN : A16
+WALK_N_GREEN : G11
+WALK_S_RED   : A19
+WALK_W_RED   : G13
+WLAK_E_RED   : E18   ; (원본 표기 그대로, 오타 의심)
+WALK_N_RED   : C11
