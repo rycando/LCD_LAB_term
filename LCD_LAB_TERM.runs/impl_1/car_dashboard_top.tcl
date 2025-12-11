@@ -17,7 +17,7 @@ proc create_report { reportName command } {
   }
 }
 namespace eval ::optrace {
-  variable script "C:/Users/user/Desktop/LCD_LAB_TERM/LCD_LAB_TERM.runs/impl_1/car_dashboard_top.tcl"
+  variable script "C:/Users/user/Desktop/term/LCD_LAB_term/LCD_LAB_TERM.runs/impl_1/car_dashboard_top.tcl"
   variable category "vivado_impl"
 }
 
@@ -126,8 +126,9 @@ set rc [catch {
   create_msg_db write_bitstream.pb
   set_param chipscope.maxJobs 5
   set_param synth.incrementalSynthesisCache C:/Users/user/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-19256-DESKTOP-K3087J8/incrSyn
+  set_param xicom.use_bs_reader 1
   open_checkpoint car_dashboard_top_routed.dcp
-  set_property webtalk.parent_dir C:/Users/user/Desktop/LCD_LAB_TERM/LCD_LAB_TERM.cache/wt [current_project]
+  set_property webtalk.parent_dir C:/Users/user/Desktop/term/LCD_LAB_term/LCD_LAB_TERM.cache/wt [current_project]
 set_property TOP car_dashboard_top [current_fileset]
 OPTRACE "read constraints: write_bitstream" START { }
 OPTRACE "read constraints: write_bitstream" END { }

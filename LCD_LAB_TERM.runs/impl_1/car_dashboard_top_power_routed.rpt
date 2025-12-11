@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
-| Date             : Thu Dec 11 19:26:17 2025
+| Date             : Thu Dec 11 20:14:03 2025
 | Host             : DESKTOP-K3087J8 running 64-bit major release  (build 9200)
 | Command          : report_power -file car_dashboard_top_power_routed.rpt -pb car_dashboard_top_power_summary_routed.pb -rpx car_dashboard_top_power_routed.rpx
 | Design           : car_dashboard_top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.147        |
+| Total On-Chip Power (W)  | 0.156        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.044        |
+| Dynamic (W)              | 0.053        |
 | Device Static (W)        | 0.103        |
 | Effective TJA (C/W)      | 2.7          |
 | Max Ambient (C)          | 84.6         |
@@ -53,17 +53,16 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.002 |        3 |       --- |             --- |
-| Slice Logic    |     0.009 |     2554 |       --- |             --- |
-|   LUT as Logic |     0.008 |     1641 |     48000 |            3.42 |
-|   CARRY4       |     0.001 |      373 |     16000 |            2.33 |
-|   Register     |    <0.001 |      273 |     96000 |            0.28 |
-|   F7/F8 Muxes  |    <0.001 |       10 |     64000 |            0.02 |
-|   Others       |     0.000 |       20 |       --- |             --- |
-| Signals        |     0.011 |     2025 |       --- |             --- |
-| DSPs           |     0.002 |        4 |       140 |            2.86 |
-| I/O            |     0.020 |       56 |       338 |           16.57 |
+| Slice Logic    |     0.015 |     3429 |       --- |             --- |
+|   LUT as Logic |     0.013 |     2153 |     48000 |            4.49 |
+|   CARRY4       |     0.001 |      494 |     16000 |            3.09 |
+|   Register     |    <0.001 |      253 |     96000 |            0.26 |
+|   Others       |     0.000 |       19 |       --- |             --- |
+| Signals        |     0.015 |     2872 |       --- |             --- |
+| DSPs           |     0.002 |        5 |       140 |            3.57 |
+| I/O            |     0.019 |       56 |       338 |           16.57 |
 | Static Power   |     0.103 |          |           |                 |
-| Total          |     0.147 |          |           |                 |
+| Total          |     0.156 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -73,9 +72,9 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.039 |       0.025 |      0.014 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.049 |       0.034 |      0.014 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.022 |       0.001 |      0.021 |       NA    | Unspecified | NA         |
-| Vcco33    |       3.300 |     0.010 |       0.006 |      0.004 |       NA    | Unspecified | NA         |
+| Vcco33    |       3.300 |     0.009 |       0.005 |      0.004 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -140,8 +139,8 @@ Table of Contents
 +-------------------+-----------+
 | Name              | Power (W) |
 +-------------------+-----------+
-| car_dashboard_top |     0.044 |
-|   u_engine        |     0.007 |
+| car_dashboard_top |     0.053 |
+|   u_engine        |     0.018 |
 |   u_piezo         |     0.013 |
 +-------------------+-----------+
 

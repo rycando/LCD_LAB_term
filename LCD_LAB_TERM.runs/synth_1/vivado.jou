@@ -2,11 +2,11 @@
 # Vivado v2020.1 (64-bit)
 # SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
 # IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
-# Start of session at: Thu Dec 11 19:24:45 2025
-# Process ID: 23856
-# Current directory: C:/Users/user/Desktop/LCD_LAB_TERM/LCD_LAB_TERM.runs/synth_1
+# Start of session at: Thu Dec 11 20:12:11 2025
+# Process ID: 26916
+# Current directory: C:/Users/user/Desktop/term/LCD_LAB_term/LCD_LAB_TERM.runs/synth_1
 # Command line: vivado.exe -log car_dashboard_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source car_dashboard_top.tcl
-# Log file: C:/Users/user/Desktop/LCD_LAB_TERM/LCD_LAB_TERM.runs/synth_1/car_dashboard_top.vds
-# Journal file: C:/Users/user/Desktop/LCD_LAB_TERM/LCD_LAB_TERM.runs/synth_1\vivado.jou
+# Log file: C:/Users/user/Desktop/term/LCD_LAB_term/LCD_LAB_TERM.runs/synth_1/car_dashboard_top.vds
+# Journal file: C:/Users/user/Desktop/term/LCD_LAB_term/LCD_LAB_TERM.runs/synth_1\vivado.jou
 #-----------------------------------------------------------
 source car_dashboard_top.tcl -notrace

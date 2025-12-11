@@ -3,8 +3,8 @@
 
 module piezo_beeper #(
     parameter integer INPUT_FREQ = 50_000_000,
-    parameter integer FREQ_MIN   = 200,
-    parameter integer FREQ_MAX   = 2000
+    parameter integer FREQ_MIN   = 50,   // 2옥타브 낮춘 기준: 200 -> 50
+    parameter integer FREQ_MAX   = 500   // 2옥타브 낮춘 상한: 2000 -> 500
 ) (
     input  wire        clk,
     input  wire        rst,

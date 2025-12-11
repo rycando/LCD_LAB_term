@@ -1,6 +1,3 @@
-// servo_pwm.v
-// 50Hz 서보 제어 PWM. 입력 duty_level은 0~1000 범위이며 1.0~2.0ms 펄스로 변환
-
 module servo_pwm #(
     parameter integer INPUT_FREQ   = 50_000_000,
     parameter integer REFRESH_HZ   = 50,
@@ -10,29 +7,25 @@ module servo_pwm #(
     input  wire clk,
     input  wire rst,
     input  wire [9:0] duty_level,
-    output reg  pwm_out
+    output wire pwm_out
 );
     localparam integer PERIOD_COUNT = INPUT_FREQ / REFRESH_HZ;
-    localparam integer MIN_COUNT    = (INPUT_FREQ * MIN_PULSE_NS) / 1_000_000_000;
-    localparam integer MAX_COUNT    = (INPUT_FREQ * MAX_PULSE_NS) / 1_000_000_000;
+    // Avoid overflow in parameter arithmetic by reducing magnitude before multiply.
+    localparam integer MIN_COUNT = (INPUT_FREQ / 1_000_000) * (MIN_PULSE_NS / 1000);
+    localparam integer MAX_COUNT = (INPUT_FREQ / 1_000_000) * (MAX_PULSE_NS / 1000);
 
-    integer cnt;
+    reg  [31:0] cnt;
     wire [31:0] high_count = MIN_COUNT + ((MAX_COUNT - MIN_COUNT) * duty_level) / 1000;
 
     always @(posedge clk or posedge rst) begin
         if (rst) begin
-            cnt     <= 0;
-            pwm_out <= 1'b0;
+            cnt <= 32'd0;
+        end else if (cnt >= PERIOD_COUNT - 1) begin
+            cnt <= 32'd0;
         end else begin
-            if (cnt >= PERIOD_COUNT - 1)
-                cnt <= 0;
-            else
-                cnt <= cnt + 1;
-
-            if (cnt < high_count)
-                pwm_out <= 1'b1;
-            else
-                pwm_out <= 1'b0;
+            cnt <= cnt + 32'd1;
         end
     end
+
+    assign pwm_out = (cnt < high_count);
 endmodule
