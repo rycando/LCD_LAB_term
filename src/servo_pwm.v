@@ -17,25 +17,22 @@ module servo_pwm #(
     localparam integer MAX_COUNT    = (INPUT_FREQ * MAX_PULSE_NS) / 1_000_000_000;
 
     integer cnt;
-    integer high_count;
+    wire [31:0] high_count = MIN_COUNT + ((MAX_COUNT - MIN_COUNT) * duty_level) / 1000;
 
     always @(posedge clk or posedge rst) begin
         if (rst) begin
-            cnt        <= 0;
-            pwm_out    <= 1'b0;
-            high_count <= MIN_COUNT;
+            cnt     <= 0;
+            pwm_out <= 1'b0;
         end else begin
-            high_count <= MIN_COUNT + ((MAX_COUNT - MIN_COUNT) * duty_level) / 1000;
-            if (cnt >= PERIOD_COUNT - 1) begin
-                cnt     <= 0;
-                pwm_out <= 1'b1;
-            end else begin
+            if (cnt >= PERIOD_COUNT - 1)
+                cnt <= 0;
+            else
                 cnt <= cnt + 1;
-                if (cnt >= high_count)
-                    pwm_out <= 1'b0;
-                else
-                    pwm_out <= 1'b1;
-            end
+
+            if (cnt < high_count)
+                pwm_out <= 1'b1;
+            else
+                pwm_out <= 1'b0;
         end
     end
 endmodule
