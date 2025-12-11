@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7s75fgga484-1" LaunchTime="1765451565">
+<GenRun Id="impl_1" LaunchPart="xc7s75fgga484-1" LaunchTime="1765452848">
   <File Type="BITSTR-BMM" Name="car_dashboard_top_bd.bmm"/>
   <File Type="OPT-METHODOLOGY-DRC" Name="car_dashboard_top_methodology_drc_opted.rpt"/>
   <File Type="INIT-TIMING" Name="car_dashboard_top_timing_summary_init.rpt"/>
@@ -119,7 +119,7 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/src/servo_pwm.v">
+    <File Path="$PPRDIR/src/servo_driver.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>

@@ -96,7 +96,7 @@ read_verilog -library xil_defaultlib {
   C:/Users/user/Desktop/term/LCD_LAB_term/src/gear_selector.v
   C:/Users/user/Desktop/term/LCD_LAB_term/src/piezo_beeper.v
   C:/Users/user/Desktop/term/LCD_LAB_term/src/seg7_decoder.v
-  C:/Users/user/Desktop/term/LCD_LAB_term/src/servo_pwm.v
+  C:/Users/user/Desktop/term/LCD_LAB_term/src/servo_driver.v
   C:/Users/user/Desktop/term/LCD_LAB_term/src/seven_seg_display.v
   C:/Users/user/Desktop/term/LCD_LAB_term/src/car_dashboard_top.v
 }

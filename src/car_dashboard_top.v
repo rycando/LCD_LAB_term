@@ -170,7 +170,7 @@ module car_dashboard_top (
 
     // 서보 제어: rpm을 0~1000 범위로 정규화하여 duty 전달
     wire [9:0] servo_level = (rpm >= 8000) ? 10'd1000 : (rpm * 10'd1000) / 14'd8000;
-    servo_pwm u_servo (
+    servo_driver u_servo (
         .clk(clk_50mhz),
         .rst(rst),
         .duty_level(servo_level),
