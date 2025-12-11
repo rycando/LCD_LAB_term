@@ -1,0 +1,86 @@
+## Clock
+set_property PACKAGE_PIN B6 [get_ports {clk_50mhz}]
+set_property IOSTANDARD LVCMOS33 [get_ports {clk_50mhz}]
+create_clock -name sys_clk -period 20.0 [get_ports {clk_50mhz}]
+
+## LEDs (rpm level)
+set_property PACKAGE_PIN L4 [get_ports {led_rpm[0]}]
+set_property PACKAGE_PIN M4 [get_ports {led_rpm[1]}]
+set_property PACKAGE_PIN M2 [get_ports {led_rpm[2]}]
+set_property PACKAGE_PIN N7 [get_ports {led_rpm[3]}]
+set_property PACKAGE_PIN M7 [get_ports {led_rpm[4]}]
+set_property PACKAGE_PIN M3 [get_ports {led_rpm[5]}]
+set_property PACKAGE_PIN M1 [get_ports {led_rpm[6]}]
+set_property PACKAGE_PIN N5 [get_ports {led_rpm[7]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {led_rpm[*]}]
+
+## Single 7-Segment (gear)
+set_property PACKAGE_PIN P1 [get_ports {seg_single[0]}]
+set_property PACKAGE_PIN P3 [get_ports {seg_single[1]}]
+set_property PACKAGE_PIN P7 [get_ports {seg_single[2]}]
+set_property PACKAGE_PIN N3 [get_ports {seg_single[3]}]
+set_property PACKAGE_PIN T5 [get_ports {seg_single[4]}]
+set_property PACKAGE_PIN R2 [get_ports {seg_single[5]}]
+set_property PACKAGE_PIN R4 [get_ports {seg_single[6]}]
+set_property PACKAGE_PIN R6 [get_ports {seg_single[7]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {seg_single[*]}]
+
+## 8 Array 7-Segment
+set_property PACKAGE_PIN F1 [get_ports {ar_seg[0]}]
+set_property PACKAGE_PIN F5 [get_ports {ar_seg[1]}]
+set_property PACKAGE_PIN E2 [get_ports {ar_seg[2]}]
+set_property PACKAGE_PIN E4 [get_ports {ar_seg[3]}]
+set_property PACKAGE_PIN J1 [get_ports {ar_seg[4]}]
+set_property PACKAGE_PIN J3 [get_ports {ar_seg[5]}]
+set_property PACKAGE_PIN J7 [get_ports {ar_seg[6]}]
+set_property PACKAGE_PIN H2 [get_ports {ar_seg[7]}]
+set_property PACKAGE_PIN H4 [get_ports {ar_sel[0]}]
+set_property PACKAGE_PIN H6 [get_ports {ar_sel[1]}]
+set_property PACKAGE_PIN G1 [get_ports {ar_sel[2]}]
+set_property PACKAGE_PIN G3 [get_ports {ar_sel[3]}]
+set_property PACKAGE_PIN L6 [get_ports {ar_sel[4]}]
+set_property PACKAGE_PIN K1 [get_ports {ar_sel[5]}]
+set_property PACKAGE_PIN K3 [get_ports {ar_sel[6]}]
+set_property PACKAGE_PIN K5 [get_ports {ar_sel[7]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {ar_seg[*]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {ar_sel[*]}]
+
+## Buttons (active-low)
+set_property PACKAGE_PIN J2 [get_ports {key_accel_n}]
+set_property PACKAGE_PIN L1 [get_ports {key_brake_n}]
+set_property IOSTANDARD LVCMOS33 [get_ports {key_accel_n}]
+set_property IOSTANDARD LVCMOS33 [get_ports {key_brake_n}]
+
+## DIP Switches
+set_property PACKAGE_PIN Y1 [get_ports {dip_sw_gears[0]}]
+set_property PACKAGE_PIN W3 [get_ports {dip_sw_gears[1]}]
+set_property PACKAGE_PIN U2 [get_ports {dip_sw_gears[2]}]
+set_property PACKAGE_PIN T1 [get_ports {dip_sw_gears[3]}]
+set_property PACKAGE_PIN W4 [get_ports {dip_sw_gears[4]}]
+set_property PACKAGE_PIN W1 [get_ports {dip_sw_gears[5]}]
+set_property PACKAGE_PIN U4 [get_ports {dip_sw8_reset}]
+set_property IOSTANDARD LVCMOS33 [get_ports {dip_sw_gears[*]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {dip_sw8_reset}]
+
+## Full Color LEDs (공통 색상 출력 복제)
+set_property PACKAGE_PIN U3 [get_ports {f_led1_b}]
+set_property PACKAGE_PIN U5 [get_ports {f_led1_g}]
+set_property PACKAGE_PIN T2 [get_ports {f_led1_r}]
+set_property PACKAGE_PIN W2 [get_ports {f_led2_b}]
+set_property PACKAGE_PIN V1 [get_ports {f_led2_g}]
+set_property PACKAGE_PIN U1 [get_ports {f_led2_r}]
+set_property PACKAGE_PIN R5 [get_ports {f_led3_b}]
+set_property PACKAGE_PIN R7 [get_ports {f_led3_g}]
+set_property PACKAGE_PIN P2 [get_ports {f_led3_r}]
+set_property PACKAGE_PIN T3 [get_ports {f_led4_b}]
+set_property PACKAGE_PIN T6 [get_ports {f_led4_g}]
+set_property PACKAGE_PIN R3 [get_ports {f_led4_r}]
+set_property IOSTANDARD LVCMOS33 [get_ports {f_led1_b f_led1_g f_led1_r f_led2_b f_led2_g f_led2_r f_led3_b f_led3_g f_led3_r f_led4_b f_led4_g f_led4_r}]
+
+## Servo Motor
+set_property PACKAGE_PIN AA22 [get_ports {servo_ctrl}]
+set_property IOSTANDARD LVCMOS33 [get_ports {servo_ctrl}]
+
+## Piezo
+set_property PACKAGE_PIN Y21 [get_ports {piezo_out}]
+set_property IOSTANDARD LVCMOS33 [get_ports {piezo_out}]
