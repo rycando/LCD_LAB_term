@@ -18,6 +18,7 @@ module engine_model #(
     output reg  [13:0] rpm,
     output wire        overload
 );
+    reg [8:0] next_speed;
     localparam integer FINAL_DRIVE = 41;   // 4.1을 0.1 고정소수점으로 표현
     localparam integer WHEEL_PER   = 887;  // 8.87을 0.01 고정소수점으로 표현
 
@@ -89,28 +90,47 @@ module engine_model #(
         end
     endfunction
 
+    function [8:0] gear_speed_max;
+        input [2:0] g;
+        begin
+            case (g)
+                3'd1: gear_speed_max = 9'd30;
+                3'd2: gear_speed_max = 9'd70;
+                3'd3: gear_speed_max = 9'd130;
+                3'd4: gear_speed_max = 9'd200;
+                3'd5: gear_speed_max = 9'd300;
+                3'd6: gear_speed_max = 9'd400;
+                default: gear_speed_max = SPEED_MAX[8:0];
+            endcase
+        end
+    endfunction
+
     always @(posedge clk or posedge rst) begin
         if (rst) begin
             speed_kmh <= 9'd0;
             rpm       <= IDLE_RPM;
         end else if (tick_10hz) begin
+            next_speed = speed_kmh;
             if (brake) begin
                 if (speed_kmh <= brake_step(gear))
-                    speed_kmh <= 9'd0;
+                    next_speed = 9'd0;
                 else
-                    speed_kmh <= speed_kmh - brake_step(gear);
+                    next_speed = speed_kmh - brake_step(gear);
             end else if (throttle) begin
                 if (speed_kmh + accel_step(gear) >= SPEED_MAX)
-                    speed_kmh <= SPEED_MAX[8:0];
+                    next_speed = SPEED_MAX[8:0];
                 else
-                    speed_kmh <= speed_kmh + accel_step(gear);
+                    next_speed = speed_kmh + accel_step(gear);
             end else begin
                 if (speed_kmh > 0)
-                    speed_kmh <= speed_kmh - 1'b1;
-                else
-                    speed_kmh <= 9'd0;
+                    next_speed = speed_kmh - 1'b1;
             end
-            rpm <= calc_rpm(speed_kmh, gear);
+
+            if (next_speed > gear_speed_max(gear))
+                next_speed = gear_speed_max(gear);
+
+            speed_kmh <= next_speed;
+            rpm       <= calc_rpm(next_speed, gear);
         end
     end
 
